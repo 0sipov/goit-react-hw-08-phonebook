@@ -1,19 +1,65 @@
-import React from 'react';
-import ContactForm from '../ContactForm';
-import Filter from '../Filter';
-import ContactList from '../ContactList';
-import './App.css';
+import React, { Component, lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AppBar from '../AppBar/AppBar';
+import operations from '../../redux/auth/auth-operations';
+import { connect } from 'react-redux';
+import PrivateRoute from '../PrivateRoute';
+import PublicRoute from '../PublicRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
-const App = () => {
-  return (
-    <div className="App">
-      <h1>Phone book</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
-  );
+const HomeView = lazy(() =>
+  import('../../views/HomeView' /* webpackChunkName: "HomeView" */),
+);
+const ContactsView = lazy(() =>
+  import('../../views/ContactsView' /* webpackChunkName: "ContactsView" */),
+);
+const LoginView = lazy(() =>
+  import('../../views/LoginView' /* webpackChunkName: "LoginView" */),
+);
+const RegistrationView = lazy(() =>
+  import(
+    '../../views/RegistrationView' /* webpackChunkName: "RegistrationView" */
+  ),
+);
+
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
+  render() {
+    return (
+      <Container>
+        <AppBar />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <Switch>
+            <Route exact path="/" component={HomeView}></Route>
+            <PrivateRoute
+              path="/contacts"
+              component={ContactsView}
+              redirectTo="/login"
+            ></PrivateRoute>
+            <PublicRoute
+              path="/login"
+              component={LoginView}
+              redirectTo="/contacts"
+              restricted
+            ></PublicRoute>
+            <PublicRoute
+              path="/registration"
+              component={RegistrationView}
+              redirectTo="/contacts"
+              restricted
+            ></PublicRoute>
+          </Switch>
+        </Suspense>
+      </Container>
+    );
+  }
+}
+
+const mapDispatchToProps = {
+  onGetCurrentUser: operations.getCurrentUser,
 };
 
-export default App;
+export default connect(null, mapDispatchToProps)(App);

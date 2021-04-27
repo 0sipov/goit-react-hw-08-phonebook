@@ -65,7 +65,7 @@ ContactList.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       number: PropTypes.string,
-      id: PropTypes.number,
+      id: PropTypes.string,
     }),
   ),
 };
