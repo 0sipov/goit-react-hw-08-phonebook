@@ -6,13 +6,13 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const Navigation = ({ isAuthorization }) => {
   return (
-    <Nav className="mr-auto">
+    <Nav className="mr-auto mb-auto mt-auto">
       <LinkContainer to="/">
-        <Nav.Link>Home page</Nav.Link>
+        <Nav.Link>Home</Nav.Link>
       </LinkContainer>
       {isAuthorization && (
         <LinkContainer to="/contacts">
-          <Nav.Link>Contacts</Nav.Link>
+          <Nav.Link className="mb-auto mt-auto">Contacts</Nav.Link>
         </LinkContainer>
       )}
     </Nav>

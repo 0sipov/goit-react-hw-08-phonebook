@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createContact } from '../../redux/contacts/contacts-operations';
 import contactsSelectors from '../../redux/contacts/contacts-selectors';
+import { Form, Button } from 'react-bootstrap';
 
 class ContactForm extends Component {
   state = {
@@ -40,31 +41,68 @@ class ContactForm extends Component {
     const { contact } = this.state;
     const { handleChange } = this;
     return (
-      <form className={styles.form} onSubmit={this.handleSubmit}>
-        <label>
-          Name
-          <input
+      <Form
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+        className={'mt-4 ml-auto mr-auto ' + styles.form}
+      >
+        <Form.Group>
+          <Form.Label>Name</Form.Label>
+          <Form.Control
             className={styles.input}
             name="name"
             type="text"
             value={contact.name}
             onChange={handleChange}
+            placeholder="Name Surname"
           />
-        </label>
-        <label>
-          Number
-          <input
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Number</Form.Label>
+          <Form.Control
             className={styles.input}
             name="number"
             type="text"
             value={contact.number}
             onChange={handleChange}
+            placeholder="(+380) 00-000-00-00"
           />
-        </label>
-        <button className={styles.addButton} type="submit">
+        </Form.Group>
+
+        <Button
+          variant="primary"
+          type="submit"
+          style={{ display: 'block', margin: 'auto' }}
+        >
           Add contact
-        </button>
-      </form>
+        </Button>
+      </Form>
+      // <form className={styles.form} onSubmit={this.handleSubmit}>
+      //   <label>
+      //     Name
+      //     <input
+      // className={styles.input}
+      // name="name"
+      // type="text"
+      // value={contact.name}
+      // onChange={handleChange}
+      //     />
+      //   </label>
+      //   <label>
+      //     Number
+      //     <input
+      // className={styles.input}
+      // name="number"
+      // type="text"
+      // value={contact.number}
+      // onChange={handleChange}
+      //     />
+      //   </label>
+      //   <button className={styles.addButton} type="submit">
+      //     Add contact
+      //   </button>
+      // </form>
     );
   }
 }

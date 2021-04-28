@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import operations from '../redux/auth/auth-operations';
+import { Form, Button } from 'react-bootstrap';
 
 class LoginView extends Component {
   state = {
@@ -19,28 +20,39 @@ class LoginView extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Login form</h1>
-        <form autoComplete="off" onSubmit={this.handleSubmit}>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              onChange={e => this.handleChange(e)}
-            ></input>
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              onChange={e => this.handleChange(e)}
-            />
-          </label>
-          <button type="submit">Login</button>
-        </form>
-      </div>
+      <Form
+        autoComplete="off"
+        onSubmit={this.handleSubmit}
+        className="mt-4 ml-auto mr-auto"
+        style={{ maxWidth: 400 }}
+      >
+        <Form.Group>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            placeholder="Enter email"
+            onChange={e => this.handleChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={e => this.handleChange(e)}
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          type="submit"
+          style={{ display: 'block', margin: 'auto' }}
+        >
+          Submit
+        </Button>
+      </Form>
     );
   }
 }

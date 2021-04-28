@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import PrivateRoute from '../PrivateRoute';
 import PublicRoute from '../PublicRoute';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 
 const HomeView = lazy(() =>
   import('../../views/HomeView' /* webpackChunkName: "HomeView" */),
@@ -31,7 +31,15 @@ class App extends Component {
     return (
       <Container>
         <AppBar />
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense
+          fallback={
+            <Spinner
+              animation="border"
+              variant="primary"
+              style={{ position: 'absolute', left: '50%', top: '50%' }}
+            />
+          }
+        >
           <Switch>
             <Route exact path="/" component={HomeView}></Route>
             <PrivateRoute

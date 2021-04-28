@@ -7,11 +7,9 @@ export const fetchContactsSuccess = createAction(
   'contacts/fetchContactSuccess',
 );
 export const fetchContactsError = createAction('contacts/fetchContactError');
-
 export const addContactRequest = createAction('contacts/addContactRequest');
 export const addContactSuccess = createAction('contacts/addContactSuccess');
 export const addContactError = createAction('contacts/addContactError');
-
 export const removeContactRequest = createAction(
   'contacts/removeContactRequest',
 );

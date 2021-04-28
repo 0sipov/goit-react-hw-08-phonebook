@@ -7,11 +7,16 @@ import {
   fetchContacts,
 } from '../../redux/contacts/contacts-operations';
 import contactsSelectors from '../../redux/contacts/contacts-selectors';
+import { Spinner, Button } from 'react-bootstrap';
 
 class ContactList extends Component {
   componentDidMount() {
     this.props.fetchContacts();
   }
+
+  loaderBtn = e => {
+    this.setState({ loaderBtn: e.target });
+  };
 
   render() {
     const { filtredContacts, onRemoveContact, isLoading } = this.props;
@@ -23,19 +28,24 @@ class ContactList extends Component {
               <p>
                 {elem.name}: {elem.number}
               </p>
-              <button
+              <Button
                 className={styles.removeButton}
                 type="button"
-                onClick={() => {
+                onClick={e => {
                   onRemoveContact(elem.id);
+                  this.loaderBtn(e);
                 }}
               >
-                Delete
-              </button>
+                {console.log(elem)}
+                {isLoading ? (
+                  <Spinner animation="border" variant="light" size="sm" />
+                ) : (
+                  'Delete'
+                )}
+              </Button>
             </li>
           );
         })}
-        {isLoading && <h2>Loading...</h2>}
       </ul>
     );
   }

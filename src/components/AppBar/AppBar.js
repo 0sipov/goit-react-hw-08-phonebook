@@ -4,16 +4,7 @@ import UserMenu from './UserMenu';
 import AuthNav from './AuthNav';
 import { connect } from 'react-redux';
 import selectors from '../../redux/auth/auth-selectors';
-import {
-  Navbar,
-  Col,
-  Row,
-  Container,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-} from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 const AppBar = ({ isAuthorization }) => {
   return (

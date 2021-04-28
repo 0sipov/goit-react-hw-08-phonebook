@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import selectors from '../../redux/auth/auth-selectors';
 import operations from '../../redux/auth/auth-operations';
-import { Badge, Button } from 'react-bootstrap';
+import { Badge, Button, Toast } from 'react-bootstrap';
 
 const UserMenu = ({ onLogout, userName }) => {
   return (
-    <div>
-      <Badge
-        variant="primary"
-        style={{ marginRight: 10, fontSize: 15, fontWeight: 400 }}
-      >
-        Wellcome, {userName}!
-      </Badge>
+    <>
+      <Toast className="mr-auto mb-auto mt-auto">
+        <Toast.Body style={{ textAlign: 'center', fontSize: 20 }}>
+          Wellcome, {userName}!
+        </Toast.Body>
+      </Toast>
+
       <Button onClick={onLogout}>Logout</Button>
-    </div>
+    </>
   );
 };
 
