@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import operations from '../redux/auth/auth-operations';
 import { Form, Button } from 'react-bootstrap';
+import styles from './LoginView.module.css';
 
 class LoginView extends Component {
   state = {
@@ -19,12 +20,12 @@ class LoginView extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
     return (
       <Form
         autoComplete="off"
         onSubmit={this.handleSubmit}
-        className="mt-4 ml-auto mr-auto"
-        style={{ maxWidth: 400 }}
+        className={styles.loginForm}
       >
         <Form.Group>
           <Form.Label>Email address</Form.Label>
@@ -33,6 +34,7 @@ class LoginView extends Component {
             name="email"
             placeholder="Enter email"
             onChange={e => this.handleChange(e)}
+            value={email}
           />
         </Form.Group>
 
@@ -43,13 +45,10 @@ class LoginView extends Component {
             name="password"
             placeholder="Password"
             onChange={e => this.handleChange(e)}
+            value={password}
           />
         </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-          style={{ display: 'block', margin: 'auto' }}
-        >
+        <Button variant="primary" type="submit" className={styles.loginButton}>
           Submit
         </Button>
       </Form>

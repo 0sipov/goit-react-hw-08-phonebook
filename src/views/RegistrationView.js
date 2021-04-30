@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import operations from '../redux/auth/auth-operations';
 import { Form, Button } from 'react-bootstrap';
+import styles from './RegistrationView.module.css';
 
 class RegistrationView extends Component {
   state = {
@@ -20,12 +21,12 @@ class RegistrationView extends Component {
   };
 
   render() {
+    const { email, name, password } = this.state;
     return (
       <Form
         autoComplete="off"
         onSubmit={this.handleSubmit}
-        className="mt-4 ml-auto mr-auto"
-        style={{ maxWidth: 400 }}
+        className={styles.loginForm}
       >
         <Form.Group>
           <Form.Label>Email address</Form.Label>
@@ -34,6 +35,7 @@ class RegistrationView extends Component {
             name="email"
             placeholder="Enter email"
             onChange={e => this.handleChange(e)}
+            value={email}
           />
         </Form.Group>
 
@@ -44,6 +46,7 @@ class RegistrationView extends Component {
             name="name"
             placeholder="Enter your name"
             onChange={e => this.handleChange(e)}
+            value={name}
           />
         </Form.Group>
 
@@ -54,13 +57,10 @@ class RegistrationView extends Component {
             name="password"
             placeholder="Password"
             onChange={e => this.handleChange(e)}
+            value={password}
           />
         </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-          style={{ display: 'block', margin: 'auto' }}
-        >
+        <Button variant="primary" type="submit" className={styles.loginButton}>
           Submit
         </Button>
       </Form>
